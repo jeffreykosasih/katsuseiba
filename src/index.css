@@ -1,0 +1,25 @@
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    font-family: 'Oswald', sans-serif;
+    letter-spacing: 0.02em;
+    @apply bg-[#eae4d5] text-[#333];
+  }
+}
+
+@layer components {
+  .primary-btn {
+    @apply bg-primary text-white font-semibold py-4 px-6;
+  }
+}
+
+@layer utilities {
+  .drop-shadow {
+    filter: drop-shadow(-6px 8px 15px rgba(0, 0, 0, 0.2));
+  }
+}
