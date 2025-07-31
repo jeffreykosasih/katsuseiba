@@ -10,28 +10,28 @@ const variants = {
   background: {
     initial: { opacity: 0 },
     animate: { opacity: 0.9 },
-    transition: { duration: 1 }
+    transition: { duration: 1 },
   },
   carousel: {
     initial: { opacity: 0, scale: 0.95 },
     animate: { opacity: 1, scale: 1 },
     exit: { opacity: 0, scale: 0.95 },
-    transition: { duration: 0.5, ease: 'easeInOut' }
-  }
+    transition: { duration: 0.5, ease: 'easeInOut' },
+  },
 };
 
 // Carousel images configuration
 const carouselImages = [
   { src: katsu1, alt: 'Katsu Dish 1' },
   { src: katsu2, alt: 'Katsu Dish 2' },
-  { src: katsu3, alt: 'Katsu Dish 3' }
+  { src: katsu3, alt: 'Katsu Dish 3' },
 ];
 
 /**
  * Hero Component
  * Main landing section featuring an image carousel and call-to-action.
  * Uses Framer Motion for smooth animations and transitions.
- * 
+ *
  * Features:
  * - Auto-rotating image carousel
  * - Responsive design
@@ -44,12 +44,12 @@ const Hero = memo(() => {
 
   // Handle image transition with useCallback
   const transitionImage = useCallback(() => {
-    setCurrentImage(prev => (prev + 1) % carouselImages.length);
+    setCurrentImage((prev) => (prev + 1) % carouselImages.length);
   }, []);
 
   // Setup auto-rotation interval
   useEffect(() => {
-    const timer = setInterval(transitionImage, 3000);
+    const timer = setInterval(transitionImage, 5000);
     return () => clearInterval(timer);
   }, [transitionImage]);
 
@@ -71,7 +71,7 @@ const Hero = memo(() => {
             animate='visible'
             className='flex-1 flex justify-center items-center mb-8 md:mb-0 md:mr-8'
           >
-            <AnimatePresence mode="wait">
+            <AnimatePresence mode='wait'>
               <motion.img
                 key={currentImage}
                 src={carouselImages[currentImage].src}

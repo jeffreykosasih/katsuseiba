@@ -8,31 +8,31 @@ const variants = {
   footer: {
     initial: { opacity: 0, y: 20 },
     whileInView: { opacity: 1, y: 0 },
-    transition: { duration: 0.5, ease: 'easeOut' }
+    transition: { duration: 0.5, ease: 'easeOut' },
   },
   modal: {
     overlay: {
       initial: { opacity: 0 },
       animate: { opacity: 1 },
-      exit: { opacity: 0 }
+      exit: { opacity: 0 },
     },
     content: {
       initial: { opacity: 0, y: 20 },
       animate: { opacity: 1, y: 0 },
       exit: { opacity: 0, y: 20 },
-      transition: { duration: 0.3 }
+      transition: { duration: 0.3 },
     },
     item: {
       initial: { opacity: 0, y: 10 },
-      animate: { opacity: 1, y: 0 }
-    }
-  }
+      animate: { opacity: 1, y: 0 },
+    },
+  },
 };
 
 // Social media links
 const socialLinks = [
   { icon: FaInstagram, url: 'https://www.instagram.com', label: 'Instagram' },
-  { icon: FaTiktok, url: 'https://www.tiktok.com', label: 'TikTok' }
+  { icon: FaTiktok, url: 'https://www.tiktok.com', label: 'TikTok' },
 ];
 
 // Image credits data
@@ -106,9 +106,11 @@ const ContributorCard = memo(({ name, link, index }) => (
   <motion.div
     {...variants.modal.item}
     transition={{ delay: index * 0.05 }}
-    className='flex flex-col items-center gap-2 p-3 rounded-md hover:bg-stone-900/5 transition-colors'
+    className='flex flex-col items-center gap-1 p-1.5 rounded-md hover:bg-stone-900/5 transition-colors'
   >
-    <span className='text-stone-900 text-sm font-medium'>{name}</span>
+    <span className='text-stone-900 text-xs font-medium text-center leading-tight'>
+      {name}
+    </span>
     <a
       href={link}
       target='_blank'
@@ -116,7 +118,7 @@ const ContributorCard = memo(({ name, link, index }) => (
       className='text-stone-900/70 hover:text-stone-900 flex items-center gap-1 transition-colors text-xs group'
     >
       View Image
-      <FiExternalLink className='group-hover:translate-x-0.5 transition-transform' />
+      <FiExternalLink className='w-3 h-3 group-hover:translate-x-0.5 transition-transform' />
     </a>
   </motion.div>
 ));
@@ -131,22 +133,26 @@ const CreditsModal = memo(({ onClose }) => (
     />
     <motion.div
       {...variants.modal.content}
-      className='fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-[#eae4d5] p-8 rounded-lg z-50 w-[90%] max-w-xl shadow-xl'
+      className='fixed top-4 left-4 right-4 md:top-1/2 md:left-1/2 md:transform md:-translate-x-1/2 md:-translate-y-1/2 bg-[#eae4d5] p-3 md:p-6 rounded-lg z-50 w-auto md:w-[90%] md:max-w-xl shadow-xl flex flex-col'
     >
-      <div className='flex flex-col items-center mb-6'>
-        <h2 className='text-2xl font-bold text-stone-900'>Image Credits</h2>
+      <div className='flex items-center justify-between mb-3 md:mb-4 border-b border-stone-300 pb-2'>
+        <h2 className='text-lg md:text-xl font-bold text-stone-900'>
+          Image Credits
+        </h2>
         <button
           onClick={onClose}
-          className='text-stone-900 hover:text-stone-600 transition-colors absolute top-4 right-4'
+          className='text-stone-900 hover:text-stone-600 transition-colors p-1'
           aria-label='Close credits'
         >
-          <FaTimes size={20} />
+          <FaTimes size={16} className='md:w-5 md:h-5' />
         </button>
       </div>
-      <div className='grid grid-cols-3 gap-4 max-w-xl mx-auto'>
-        {contributors.map((contributor, index) => (
-          <ContributorCard key={index} {...contributor} index={index} />
-        ))}
+      <div className='flex-1 overflow-y-auto pb-2'>
+        <div className='grid grid-cols-2 md:grid-cols-3 gap-2 md:gap-3'>
+          {contributors.map((contributor, index) => (
+            <ContributorCard key={index} {...contributor} index={index} />
+          ))}
+        </div>
       </div>
     </motion.div>
   </>
@@ -165,7 +171,7 @@ const Footer = () => {
   const [showCredits, setShowCredits] = useState(false);
 
   const toggleCredits = useCallback(() => {
-    setShowCredits(prev => !prev);
+    setShowCredits((prev) => !prev);
   }, []);
 
   return (

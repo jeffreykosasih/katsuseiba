@@ -9,8 +9,8 @@ export const FadeUp = (delay = 0) => {
       opacity: 1,
       transition: {
         type: 'spring',
-        stiffness: 300,
-        damping: 30,
+        stiffness: 150,
+        damping: 25,
         delay: delay,
       },
     },
@@ -28,8 +28,8 @@ export const FadeLeft = (delay = 0) => {
       opacity: 1,
       transition: {
         type: 'spring',
-        stiffness: 300,
-        damping: 30,
+        stiffness: 150,
+        damping: 25,
         delay: delay,
       },
     },
@@ -47,8 +47,8 @@ export const FadeRight = (delay = 0) => {
       opacity: 1,
       transition: {
         type: 'spring',
-        stiffness: 300,
-        damping: 30,
+        stiffness: 150,
+        damping: 25,
         delay: delay,
       },
     },
