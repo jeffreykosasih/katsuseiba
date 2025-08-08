@@ -86,7 +86,7 @@ const Logo = memo(() => (
 // Social links component
 const SocialLinks = memo(() => (
   <div className='text-2xl flex items-center gap-4 text-[#eae4d5]'>
-    {socialLinks.map(({ icon: IconComponent, url, label }) => (
+    {socialLinks.map(({ icon: Icon, url, label }) => (
       <a
         key={label}
         href={url}
@@ -95,7 +95,7 @@ const SocialLinks = memo(() => (
         className='hover:text-[#eae4d5]/80 transition-colors'
         aria-label={label}
       >
-        <IconComponent className='w-6 h-6' />
+        <Icon className='w-6 h-6' />
       </a>
     ))}
   </div>
@@ -106,19 +106,19 @@ const ContributorCard = memo(({ name, link, index }) => (
   <motion.div
     {...variants.modal.item}
     transition={{ delay: index * 0.05 }}
-    className='flex flex-col items-center gap-1 p-1.5 rounded-md hover:bg-stone-900/5 transition-colors'
+    className='flex flex-col items-center gap-2 p-3 sm:p-4 rounded-xl hover:bg-stone-200/50 transition-all duration-300 hover:scale-105 border border-stone-200'
   >
-    <span className='text-stone-900 text-xs font-medium text-center leading-tight'>
+    <span className='text-stone-900 fluid-text-sm font-medium text-center leading-tight'>
       {name}
     </span>
     <a
       href={link}
       target='_blank'
       rel='noopener noreferrer'
-      className='text-stone-900/70 hover:text-stone-900 flex items-center gap-1 transition-colors text-xs group'
+      className='text-stone-900/70 hover:text-stone-900 flex items-center gap-1.5 transition-all duration-300 fluid-text-xs group hover:scale-105'
     >
       View Image
-      <FiExternalLink className='w-3 h-3 group-hover:translate-x-0.5 transition-transform' />
+      <FiExternalLink className='w-3 h-3 sm:w-4 sm:h-4 group-hover:translate-x-1 transition-transform duration-300' />
     </a>
   </motion.div>
 ));
@@ -128,27 +128,27 @@ const CreditsModal = memo(({ onClose }) => (
   <>
     <motion.div
       {...variants.modal.overlay}
-      className='fixed inset-0 bg-black bg-opacity-50 z-50'
+      className='fixed inset-0 bg-black/60 backdrop-blur-sm z-50 safe-top safe-bottom'
       onClick={onClose}
     />
     <motion.div
       {...variants.modal.content}
-      className='fixed top-4 left-4 right-4 md:top-1/2 md:left-1/2 md:transform md:-translate-x-1/2 md:-translate-y-1/2 bg-[#eae4d5] p-3 md:p-6 rounded-lg z-50 w-auto md:w-[90%] md:max-w-xl shadow-xl flex flex-col'
+      className='fixed top-4 left-4 right-4 bottom-4 sm:top-1/2 sm:left-1/2 sm:right-auto sm:bottom-auto sm:transform sm:-translate-x-1/2 sm:-translate-y-1/2 bg-[#eae4d5] responsive-card z-50 w-auto sm:w-[90vw] sm:max-w-2xl shadow-2xl flex flex-col max-h-[90vh]'
     >
-      <div className='flex items-center justify-between mb-3 md:mb-4 border-b border-stone-300 pb-2'>
-        <h2 className='text-lg md:text-xl font-bold text-stone-900'>
+      <div className='flex items-center justify-between mb-4 sm:mb-6 border-b border-stone-300 pb-3 sm:pb-4'>
+        <h2 className='fluid-text-xl font-bold text-stone-900'>
           Image Credits
         </h2>
         <button
           onClick={onClose}
-          className='text-stone-900 hover:text-stone-600 transition-colors p-1'
+          className='text-stone-900 hover:text-stone-600 hover:bg-stone-200/50 rounded-lg transition-all duration-200 p-2 active:scale-95'
           aria-label='Close credits'
         >
-          <FaTimes size={16} className='md:w-5 md:h-5' />
+          <FaTimes className='w-4 h-4 sm:w-5 sm:h-5' />
         </button>
       </div>
       <div className='flex-1 overflow-y-auto pb-2'>
-        <div className='grid grid-cols-2 md:grid-cols-3 gap-2 md:gap-3'>
+        <div className='responsive-grid-3 lg:grid-cols-3'>
           {contributors.map((contributor, index) => (
             <ContributorCard key={index} {...contributor} index={index} />
           ))}
@@ -175,27 +175,28 @@ const Footer = () => {
   }, []);
 
   return (
-    <footer className='bg-stone-900 py-12 mt-12 rounded-t-2xl'>
+    <footer className='bg-stone-900 responsive-py mt-8 sm:mt-12 rounded-t-2xl sm:rounded-t-3xl safe-bottom'>
       {/* Main footer container with fade-in animation */}
-      <motion.div
-        {...variants.footer}
-        className='container flex justify-between items-center'
-      >
-        <Logo />
-        <div className='flex items-center gap-8'>
-          <SocialLinks />
-          <div className='h-6 w-[1px] bg-[#eae4d5] opacity-30'></div>
-          <button
-            onClick={toggleCredits}
-            className='text-sm text-[#eae4d5] border border-[#eae4d5] px-3 py-1 rounded-md transition-all duration-300 hover:bg-[#eae4d5] hover:text-stone-900 hover:border-[#eae4d5]'
-          >
-            Credits
-          </button>
+      <motion.div {...variants.footer} className='responsive-container'>
+        <div className='responsive-flex justify-between items-center'>
+          <Logo />
 
-          <AnimatePresence mode='wait'>
-            {showCredits && <CreditsModal onClose={toggleCredits} />}
-          </AnimatePresence>
+          <div className='flex flex-col sm:flex-row items-center responsive-gap'>
+            <SocialLinks />
+            <div className='hidden sm:block h-6 w-[1px] bg-[#eae4d5] opacity-30'></div>
+            <div className='block sm:hidden w-24 h-[1px] bg-[#eae4d5] opacity-30'></div>
+            <button
+              onClick={toggleCredits}
+              className='fluid-text-sm text-[#eae4d5] border border-[#eae4d5] px-4 py-2 sm:px-3 sm:py-1 rounded-lg sm:rounded-md transition-all duration-300 hover:bg-[#eae4d5] hover:text-stone-900 hover:scale-105 active:scale-95'
+            >
+              Credits
+            </button>
+          </div>
         </div>
+
+        <AnimatePresence mode='wait'>
+          {showCredits && <CreditsModal onClose={toggleCredits} />}
+        </AnimatePresence>
       </motion.div>
     </footer>
   );

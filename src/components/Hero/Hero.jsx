@@ -54,33 +54,39 @@ const Hero = memo(() => {
   }, [transitionImage]);
 
   return (
-    <section className='container mx-auto max-w-7xl mb-12'>
-      <div className='relative min-h-[600px] flex items-center justify-center overflow-hidden bg-stone-800 rounded-3xl'>
+    <section className='w-full responsive-container'>
+      <div className='relative min-h-[70vh] sm:min-h-[80vh] md:min-h-[90vh] max-h-screen flex items-center justify-center overflow-hidden bg-stone-800 rounded-2xl sm:rounded-3xl'>
         {/* Static background image with fade-in animation */}
         <motion.img
           src={katsu1}
           alt='Restaurant Background'
-          className='absolute inset-0 w-full h-full object-cover object-center z-0 opacity-90'
+          className='absolute inset-0 w-full h-full object-cover object-center z-0'
+          style={{ opacity: 0.85 }}
           {...variants.background}
         />
-        <div className='container relative z-10 flex flex-col md:flex-row items-center justify-center min-h-[650px] px-6 py-14 md:py-24'>
+
+        {/* Overlay for better text readability */}
+        <div className='absolute inset-0 bg-gradient-to-r from-stone-900/60 via-stone-900/40 to-stone-900/60 z-5'></div>
+
+        <div className='relative z-10 w-full responsive-flex min-h-[60vh] sm:min-h-[70vh] md:min-h-[80vh] responsive-px responsive-py'>
           {/* Left side with auto-rotating carousel */}
           <motion.div
             variants={FadeRight(0.4)}
             initial='hidden'
             animate='visible'
-            className='flex-1 flex justify-center items-center mb-8 md:mb-0 md:mr-8'
+            className='w-full sm:w-1/2 flex justify-center items-center mb-8 sm:mb-0'
           >
-            <AnimatePresence mode='wait'>
-              <motion.img
-                key={currentImage}
-                src={carouselImages[currentImage].src}
-                alt={carouselImages[currentImage].alt}
-                className='w-[480px] h-[320px] object-cover rounded-xl drop-shadow-lg'
-                style={{ boxShadow: '0 8px 32px 0 rgba(0,0,0,0.18)' }}
-                {...variants.carousel}
-              />
-            </AnimatePresence>
+            <div className='w-full max-w-[280px] sm:max-w-[320px] md:max-w-[400px] lg:max-w-[480px]'>
+              <AnimatePresence mode='wait'>
+                <motion.img
+                  key={currentImage}
+                  src={carouselImages[currentImage].src}
+                  alt={carouselImages[currentImage].alt}
+                  className='w-full aspect-[3/2] object-cover rounded-xl sm:rounded-2xl shadow-2xl'
+                  {...variants.carousel}
+                />
+              </AnimatePresence>
+            </div>
           </motion.div>
 
           {/* Right side with animated heading and CTA button */}
@@ -88,29 +94,46 @@ const Hero = memo(() => {
             variants={FadeLeft(0.4)}
             initial='hidden'
             animate='visible'
-            className='flex-1 text-center md:text-left'
+            className='w-full sm:w-1/2 flex flex-col justify-center text-center sm:text-left sm:pl-8 md:pl-12'
           >
-            <h1 className='text-4xl md:text-5xl lg:text-6xl font-bold mb-4 text-[#eae4d5] drop-shadow-[0_2px_2px_rgba(0,0,0,0.5)]'>
-              Discover Our <br /> Japanese Cuisine
+            <h1 className='fluid-text-4xl lg:text-6xl xl:text-7xl font-bold mb-4 sm:mb-6 text-[#eae4d5] drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)] leading-tight'>
+              Discover Our <br className='hidden sm:block' />
+              Japanese Cuisine
             </h1>
-            <p className='text-lg md:text-xl text-[#eae4d5] opacity-90 mb-8 max-w-lg drop-shadow-[0_1px_1px_rgba(0,0,0,0.3)]'>
+            <p className='fluid-text-lg md:text-xl lg:text-2xl text-[#eae4d5] opacity-90 mb-6 sm:mb-8 max-w-lg mx-auto sm:mx-0 drop-shadow-[0_1px_2px_rgba(0,0,0,0.6)] leading-relaxed'>
               Experience the perfect blend of traditional flavors and modern
               culinary artistry.
             </p>
-            <motion.a
-              href='#reservations'
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className='bg-[#eae4d5] text-stone-900 px-8 py-3 rounded-lg text-lg font-semibold hover:bg-opacity-90 transition-colors cursor-pointer no-underline inline-block drop-shadow-md hover:drop-shadow-lg'
-              onClick={(e) => {
-                e.preventDefault();
-                document
-                  .getElementById('reservations')
-                  .scrollIntoView({ behavior: 'smooth' });
-              }}
-            >
-              Order Now
-            </motion.a>
+            <div className='flex flex-col sm:flex-row gap-4 sm:gap-6 items-center sm:items-start'>
+              <motion.a
+                href='#reservations'
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className='bg-[#eae4d5] text-stone-900 px-6 sm:px-8 py-3 sm:py-4 rounded-xl fluid-text-lg font-semibold hover:bg-opacity-90 transition-all duration-300 cursor-pointer no-underline inline-block shadow-lg hover:shadow-xl transform'
+                onClick={(e) => {
+                  e.preventDefault();
+                  document
+                    .getElementById('reservations')
+                    ?.scrollIntoView({ behavior: 'smooth' });
+                }}
+              >
+                Order Now
+              </motion.a>
+              <motion.a
+                href='#menu'
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className='border-2 border-[#eae4d5] text-[#eae4d5] px-6 sm:px-8 py-3 sm:py-4 rounded-xl fluid-text-lg font-semibold hover:bg-[#eae4d5] hover:text-stone-900 transition-all duration-300 cursor-pointer no-underline inline-block'
+                onClick={(e) => {
+                  e.preventDefault();
+                  document
+                    .getElementById('menu')
+                    ?.scrollIntoView({ behavior: 'smooth' });
+                }}
+              >
+                View Menu
+              </motion.a>
+            </div>
           </motion.div>
         </div>
       </div>

@@ -60,14 +60,14 @@ const menuItems = [
  */
 // NavLink component for better performance
 const NavLink = memo(({ title, link, onClick }) => (
-  <motion.li {...variants.link}>
+  <motion.li {...variants.link} className='relative'>
     <a
       href={link}
       onClick={(e) => {
         e.preventDefault();
         onClick();
       }}
-      className='font-semibold text-stone-950 hover:text-stone-500 transition-colors duration-300'
+      className='font-semibold text-stone-950 hover:text-stone-600 transition-all duration-300 relative py-2 px-3 rounded-lg hover:bg-stone-200/50 whitespace-nowrap'
     >
       {title}
     </a>
@@ -76,8 +76,10 @@ const NavLink = memo(({ title, link, onClick }) => (
 
 // Logo component
 const Logo = memo(() => (
-  <div className='text-2xl flex items-center gap-2 font-bold uppercase justify-center'>
-    <p className='text-primary'>KATSU SEIBA</p>
+  <div className='flex items-center gap-1 sm:gap-2 font-bold uppercase'>
+    <p className='text-lg sm:text-xl md:text-2xl text-primary tracking-wide'>
+      KATSU SEIBA
+    </p>
   </div>
 ));
 
@@ -86,9 +88,9 @@ const MenuButton = memo(({ onClick }) => (
   <button
     onClick={onClick}
     aria-label='Toggle menu'
-    className='p-2 hover:opacity-80 transition-opacity'
+    className='p-2 sm:p-3 hover:bg-stone-200/50 rounded-lg transition-all duration-300 active:scale-95'
   >
-    <FaBars size={24} className='text-stone-900' />
+    <FaBars size={20} className='sm:w-6 sm:h-6 text-stone-900' />
   </button>
 ));
 
@@ -124,17 +126,18 @@ const Navbar = () => {
   }));
 
   return (
-    <nav className='py-6 mb-6 rounded-b-2xl'>
+    <nav className='w-full py-4 sm:py-6 safe-top'>
       {/* Main navbar container with fade-in animation */}
       <motion.div
         {...variants.navbar}
-        className='container flex justify-between items-center min-h-[48px]'
+        className='responsive-container flex justify-between items-center min-h-[48px] sm:min-h-[56px] md:min-h-[64px]'
       >
         <Logo />
+
         {/* Desktop menu - hidden on mobile */}
-        <div className='hidden md:block'>
+        <div className='hidden md:flex items-center'>
           {/* Navigation links */}
-          <ul className='flex items-center gap-8 text-lg'>
+          <ul className='flex items-center gap-4 lg:gap-8 fluid-text-base font-medium'>
             {menuItemsWithHandlers.map((item) => (
               <NavLink key={item.id} {...item} />
             ))}
@@ -142,13 +145,13 @@ const Navbar = () => {
         </div>
 
         {/* Mobile hamburger menu button */}
-        <div className='md:hidden'>
+        <div className='md:hidden flex items-center'>
           <MenuButton onClick={toggleMenu} />
         </div>
       </motion.div>
 
       {/* Responsive mobile menu overlay with animation */}
-      <AnimatePresence>
+      <AnimatePresence mode='wait'>
         {open && (
           <ResponsiveMenu
             isOpen={open}

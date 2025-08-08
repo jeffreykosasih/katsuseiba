@@ -45,80 +45,89 @@ const locations = [
  */
 const Banner2 = () => {
   return (
-    <section id='locations' className='container max-w-7xl mx-auto mb-12'>
-      <div className='relative min-h-[350px] flex items-center justify-center overflow-hidden bg-stone-800 rounded-3xl'>
-        {/* Background Image with fade-in animation */}
-        <motion.img
-          src={BannerPng}
-          alt='Restaurant Background'
-          className='absolute inset-0 w-full h-full object-cover object-center z-0 opacity-90'
-          {...variants.background}
-        />
-        <div className='container relative z-10 flex flex-col md:flex-row items-center justify-between min-h-[350px] px-6 py-5 md:py-8'>
-          {/* Left side content with animated heading and description */}
-          <div className='md:w-1/3 flex flex-col justify-center mb-8 md:mb-0 md:ml-auto md:mr-12'>
-            <div className='text-center md:text-left space-y-6'>
-              <motion.h1
-                {...variants.content}
-                className='text-3xl md:text-4xl lg:text-5xl font-bold text-[#eae4d5] mb-3 drop-shadow-lg'
-              >
-                Our Locations 📍
-              </motion.h1>
-              <motion.p
-                {...variants.content}
-                transition={{ ...variants.content.transition, delay: 0.3 }}
-                className='text-base md:text-lg text-[#eae4d5] opacity-90 mb-6 max-w-lg drop-shadow-md'
-              >
-                We are currently located in 3 locations. Between Maribyrnong,
-                Port Melbourne and Canterbury, we serve the best katsu in town.
-              </motion.p>
-              <div className='grid grid-cols-1 md:grid-cols-3 gap-6'>
+    <section className='w-full overflow-hidden'>
+      <div className='responsive-container responsive-py'>
+        <div className='relative min-h-[500px] sm:min-h-[600px] md:min-h-[700px] flex items-center justify-center overflow-hidden bg-stone-800 rounded-2xl sm:rounded-3xl shadow-2xl'>
+          {/* Background Image with fade-in animation */}
+          <motion.img
+            src={BannerPng}
+            alt='Restaurant Background'
+            className='absolute inset-0 w-full h-full object-cover object-center z-0'
+            style={{ opacity: 0.85 }}
+            {...variants.background}
+          />
+
+          {/* Overlay for better text readability */}
+          <div className='absolute inset-0 bg-gradient-to-b from-stone-900/70 via-stone-900/50 to-stone-900/70 z-5'></div>
+
+          <div className='relative z-10 w-full responsive-flex items-stretch responsive-px responsive-py min-h-[450px] sm:min-h-[550px] md:min-h-[650px]'>
+            {/* Left side content with animated heading and description */}
+            <div className='w-full lg:w-1/2 flex flex-col justify-center space-y-6 sm:space-y-8'>
+              <div className='text-center lg:text-left'>
+                <motion.h1
+                  {...variants.content}
+                  className='fluid-text-4xl lg:text-5xl xl:text-6xl font-bold text-[#eae4d5] mb-4 sm:mb-6 drop-shadow-lg leading-tight'
+                >
+                  Our Locations 📍
+                </motion.h1>
+                <motion.p
+                  {...variants.content}
+                  transition={{ ...variants.content.transition, delay: 0.3 }}
+                  className='fluid-text-lg lg:text-xl text-[#eae4d5] opacity-90 mb-6 sm:mb-8 max-w-2xl mx-auto lg:mx-0 drop-shadow-md leading-relaxed'
+                >
+                  We are currently located in 3 locations. Between Maribyrnong,
+                  Port Melbourne and Canterbury, we serve the best katsu in
+                  town.
+                </motion.p>
+              </div>
+
+              <div className='responsive-grid-3'>
                 {locations.map((location, index) => (
                   <motion.div
                     key={index}
                     {...variants.content}
                     transition={{
                       ...variants.content.transition,
-                      delay: 0.2 + index * 0.1,
+                      delay: 0.4 + index * 0.1,
                     }}
-                    className='text-left'
+                    className='text-center lg:text-left space-y-2'
                   >
-                    <h3 className='text-xl font-bold text-[#eae4d5] mb-2 drop-shadow-md'>
+                    <h3 className='fluid-text-xl font-bold text-[#eae4d5] drop-shadow-md'>
                       {location.title}
                     </h3>
-                    <p className='text-[#eae4d5] opacity-90 drop-shadow-sm'>
+                    <p className='fluid-text-base text-[#eae4d5] opacity-90 drop-shadow-sm leading-relaxed'>
                       {location.description}
                     </p>
                   </motion.div>
                 ))}
               </div>
             </div>
-          </div>
 
-          {/* Right side with Google Maps */}
-          <div className='md:w-1/2'>
-            <div className='bg-stone-800 p-6 rounded-3xl shadow-lg max-w-md mx-auto'>
-              <div className='space-y-4'>
-                {locations.map((location, index) => (
-                  <motion.div
-                    key={index}
-                    {...variants.content}
-                    transition={{
-                      ...variants.content.transition,
-                      delay: 0.2 + index * 0.1,
-                    }}
-                  >
-                    <iframe
-                      src={location.mapUrl}
-                      className='w-full h-[150px] rounded-lg shadow-md'
-                      style={{ border: 0 }}
-                      allowFullScreen=''
-                      loading='lazy'
-                      referrerPolicy='no-referrer-when-downgrade'
-                      title={`${location.title} Map`}
-                    />
-                  </motion.div>
-                ))}
+            {/* Right side with Google Maps */}
+            <div className='w-full lg:w-1/2 flex items-center justify-center mt-8 lg:mt-0'>
+              <div className='w-full max-w-md lg:max-w-lg bg-stone-800/90 backdrop-blur-sm responsive-card shadow-2xl'>
+                <div className='space-y-4 sm:space-y-6'>
+                  {locations.map((location, index) => (
+                    <motion.div
+                      key={index}
+                      {...variants.content}
+                      transition={{
+                        ...variants.content.transition,
+                        delay: 0.6 + index * 0.1,
+                      }}
+                    >
+                      <iframe
+                        src={location.mapUrl}
+                        className='w-full h-[120px] sm:h-[140px] md:h-[160px] rounded-xl shadow-lg'
+                        style={{ border: 0 }}
+                        allowFullScreen=''
+                        loading='lazy'
+                        referrerPolicy='no-referrer-when-downgrade'
+                        title={`${location.title} Map`}
+                      />
+                    </motion.div>
+                  ))}
+                </div>
               </div>
             </div>
           </div>

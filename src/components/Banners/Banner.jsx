@@ -10,51 +10,55 @@ import { motion } from 'framer-motion';
  */
 const Banner = () => {
   return (
-    <section className='container mb-12'>
-      <div className='flex justify-center items-center gap-8 md:gap-12'>
-        {/* Restaurant image - hidden on mobile, animated slide-in from left */}
-        <motion.div
-          initial={{ opacity: 0, x: -50 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
-          className='hidden md:block w-[300px] lg:w-[400px] flex-shrink-0'
-        >
-          <img
-            src={RestoPng}
-            alt='Restaurant Interior'
-            className='w-full h-[550px] object-cover rounded-3xl shadow-xl'
-          />
-        </motion.div>
+    <section className='w-full overflow-hidden'>
+      <div className='responsive-container responsive-py'>
+        <div className='responsive-flex-reverse responsive-gap items-stretch'>
+          {/* Restaurant image - responsive visibility */}
+          <motion.div
+            initial={{ opacity: 0, x: -50 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+            className='w-full sm:w-1/2 max-w-[500px] mx-auto sm:mx-0'
+          >
+            <img
+              src={RestoPng}
+              alt='Restaurant Interior'
+              className='w-full h-[300px] sm:h-[400px] md:h-[500px] lg:h-[550px] object-cover rounded-2xl sm:rounded-3xl shadow-2xl'
+            />
+          </motion.div>
 
-        {/* Chef quote section with animated text elements */}
-        <div className='w-full max-w-xl h-[550px] rounded-3xl overflow-hidden bg-stone-900'>
-          <div className='h-full p-10 md:p-12 flex flex-col justify-center'>
-            <motion.h2
-              initial={{ opacity: 0, x: -50 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5 }}
-              className='text-3xl md:text-4xl font-bold text-[#eae4d5] mb-6 drop-shadow-lg'
-            >
-              Seiba San
-            </motion.h2>
-            <motion.div
-              initial={{ opacity: 0, x: -50 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: 0.2 }}
-              className='text-base md:text-lg text-[#eae4d5]/90 space-y-6 drop-shadow-md'
-            >
-              <p>
-                "Our mission is to make sure y'all enjoy Japanese cuisine in
-                Melbourne, this is how we do it right."
-              </p>
-              <p>
-                "Every katsu we serve is a way of our showing quality and our
-                respect for Japanese culinary traditions."
-              </p>
-            </motion.div>
+          {/* Chef quote section with animated text elements */}
+          <div className='w-full sm:w-1/2 flex items-center'>
+            <div className='w-full h-[300px] sm:h-[400px] md:h-[500px] lg:h-[550px] rounded-2xl sm:rounded-3xl overflow-hidden bg-stone-900 shadow-2xl'>
+              <div className='h-full responsive-px responsive-py flex flex-col justify-center'>
+                <motion.h2
+                  initial={{ opacity: 0, x: -50 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5 }}
+                  className='fluid-text-3xl md:text-4xl lg:text-5xl font-bold text-[#eae4d5] mb-6 sm:mb-8 drop-shadow-lg'
+                >
+                  Seiba San
+                </motion.h2>
+                <motion.div
+                  initial={{ opacity: 0, x: -50 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: 0.2 }}
+                  className='fluid-text-base md:text-lg lg:text-xl text-[#eae4d5]/90 space-y-4 sm:space-y-6 drop-shadow-md leading-relaxed'
+                >
+                  <p>
+                    "Our mission is to make sure y'all enjoy Japanese cuisine in
+                    Melbourne, this is how we do it right."
+                  </p>
+                  <p>
+                    "Every katsu we serve is a way of our showing quality and
+                    our respect for Japanese culinary traditions."
+                  </p>
+                </motion.div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
