@@ -5,169 +5,21 @@
 @tailwind utilities;
 
 @layer base {
-  * {
-    box-sizing: border-box;
-  }
-
-  html {
-    scroll-behavior: smooth;
-    overflow-x: hidden;
-  }
-
   body {
     font-family: 'Oswald', sans-serif;
     letter-spacing: 0.02em;
-    overflow-x: hidden;
-    @apply bg-[#eae4d5] text-[#333] min-h-screen;
-  }
-
-  /* Ensure images are responsive by default */
-  img {
-    max-width: 100%;
-    height: auto;
+    @apply bg-[#eae4d5] text-[#333];
   }
 }
 
 @layer components {
   .primary-btn {
-    @apply bg-primary text-white font-semibold py-4 px-6 transition-all duration-300 hover:scale-105 active:scale-95;
-  }
-
-  /* Responsive container utilities */
-  .responsive-container {
-    @apply container mx-auto px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16;
-  }
-
-  /* Fluid typography */
-  .fluid-text-xs {
-    @apply text-xs sm:text-sm;
-  }
-
-  .fluid-text-sm {
-    @apply text-sm sm:text-base;
-  }
-
-  .fluid-text-base {
-    @apply text-base sm:text-lg;
-  }
-
-  .fluid-text-lg {
-    @apply text-lg sm:text-xl;
-  }
-
-  .fluid-text-xl {
-    @apply text-xl sm:text-2xl;
-  }
-
-  .fluid-text-2xl {
-    @apply text-2xl sm:text-3xl;
-  }
-
-  .fluid-text-3xl {
-    @apply text-3xl sm:text-4xl md:text-5xl;
-  }
-
-  .fluid-text-4xl {
-    @apply text-4xl sm:text-5xl md:text-6xl;
-  }
-
-  .fluid-text-5xl {
-    @apply text-5xl sm:text-6xl md:text-7xl;
-  }
-
-  /* Responsive spacing */
-  .responsive-py {
-    @apply py-4 sm:py-6 md:py-8 lg:py-12 xl:py-16;
-  }
-
-  .responsive-px {
-    @apply px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16;
-  }
-
-  .responsive-gap {
-    @apply gap-4 sm:gap-6 md:gap-8 lg:gap-12;
-  }
-
-  /* Card layouts */
-  .responsive-card {
-    @apply rounded-2xl p-4 sm:p-6 md:p-8 shadow-lg transition-all duration-300;
-  }
-
-  /* Grid layouts */
-  .responsive-grid-2 {
-    @apply grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 md:gap-8;
-  }
-
-  .responsive-grid-3 {
-    @apply grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 md:gap-8;
-  }
-
-  .responsive-grid-4 {
-    @apply grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6 md:gap-8;
-  }
-
-  /* Flex layouts */
-  .responsive-flex {
-    @apply flex flex-col sm:flex-row items-center gap-4 sm:gap-6 md:gap-8;
-  }
-
-  .responsive-flex-reverse {
-    @apply flex flex-col sm:flex-row-reverse items-center gap-4 sm:gap-6 md:gap-8;
+    @apply bg-primary text-white font-semibold py-4 px-6;
   }
 }
 
 @layer utilities {
   .drop-shadow {
     filter: drop-shadow(-6px 8px 15px rgba(0, 0, 0, 0.2));
-  }
-
-  /* Portrait specific styles */
-  .portrait-only {
-    @media (orientation: portrait) {
-      display: block;
-    }
-    @media (orientation: landscape) {
-      display: none;
-    }
-  }
-
-  /* Landscape specific styles */
-  .landscape-only {
-    @media (orientation: landscape) {
-      display: block;
-    }
-    @media (orientation: portrait) {
-      display: none;
-    }
-  }
-
-  /* Responsive image utilities */
-  .responsive-img {
-    @apply w-full h-auto object-cover;
-  }
-
-  .responsive-img-square {
-    @apply w-full aspect-square object-cover;
-  }
-
-  .responsive-img-video {
-    @apply w-full aspect-video object-cover;
-  }
-
-  /* Safe area utilities for mobile devices */
-  .safe-top {
-    padding-top: env(safe-area-inset-top);
-  }
-
-  .safe-bottom {
-    padding-bottom: env(safe-area-inset-bottom);
-  }
-
-  .safe-left {
-    padding-left: env(safe-area-inset-left);
-  }
-
-  .safe-right {
-    padding-right: env(safe-area-inset-right);
   }
 }

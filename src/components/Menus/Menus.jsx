@@ -79,24 +79,19 @@ const MenuItem = memo(({ title, desc, img, index }) => (
   <motion.div
     {...variants.menuItem}
     transition={{ ...variants.menuItem.transition, delay: 0.1 * index }}
-    className='responsive-card bg-stone-800 flex flex-col items-center justify-center responsive-gap min-h-[240px] sm:min-h-[260px] md:min-h-[280px] hover:shadow-2xl hover:-translate-y-2 group'
+    className='bg-stone-800 rounded-xl px-8 py-8 shadow-[0_0_22px_0_rgba(0,0,0,0.15)] flex flex-col items-center justify-center gap-4 min-h-[260px]'
   >
-    <div className='w-full max-w-[200px] sm:max-w-[180px] md:max-w-[200px] overflow-hidden rounded-xl'>
-      <motion.img
-        src={img}
-        alt={title}
-        loading='lazy'
-        className='w-full aspect-[16/9] object-cover transition-transform duration-300 group-hover:scale-110'
-        whileHover={{ scale: 1.05, transition: { duration: 0.2 } }}
-      />
-    </div>
-    <div className='text-center space-y-2'>
-      <h2 className='fluid-text-xl font-semibold text-[#EAE4D5] leading-tight'>
-        {title}
-      </h2>
-      <p className='fluid-text-lg font-bold text-[#EAE4D5] opacity-90'>
-        {desc}
-      </p>
+    <motion.img
+      src={img}
+      alt={title}
+      loading='lazy'
+      className='w-[180px] h-[100px] object-cover rounded-xl mx-auto mb-2 relative z-0'
+      style={{ boxShadow: '40px 0 60px -30px #EAE4D5 inset' }}
+      whileHover={{ scale: 1.1, transition: { duration: 0.2 } }}
+    />
+    <div className='text-center'>
+      <h2 className='text-xl font-semibold text-[#EAE4D5]'>{title}</h2>
+      <p className='text-lg font-semibold text-[#EAE4D5]'>{desc}</p>
     </div>
   </motion.div>
 ));
@@ -112,52 +107,23 @@ const MenuItem = memo(({ title, desc, img, index }) => (
  */
 const Menus = memo(() => {
   return (
-    <section id='menu' className='w-full overflow-hidden'>
-      <div className='responsive-container responsive-py'>
+    <section id='menu'>
+      <div className='container pt-12 pb-20'>
         {/* Animated section heading */}
-        <motion.div
+        <motion.h1
           {...variants.heading}
-          className='text-center sm:text-left mb-8 sm:mb-12 md:mb-16'
+          className='text-2xl font-bold text-left pb-10 uppercase text-primary'
         >
-          <h1 className='fluid-text-3xl font-bold uppercase text-primary mb-2 tracking-wide'>
-            Our Menu
-          </h1>
-          <p className='fluid-text-lg text-stone-600 max-w-2xl mx-auto sm:mx-0'>
-            Discover our carefully crafted selection of authentic Japanese
-            dishes
-          </p>
-        </motion.div>
+          Our menu
+        </motion.h1>
 
         {/* Responsive grid layout for menu items */}
-        <div className='responsive-grid-4 xl:grid-cols-4'>
+        <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8'>
           {/* Map through menu items with animations */}
           {menuItems.map((item, index) => (
             <MenuItem key={item.id} {...item} index={index} />
           ))}
         </div>
-
-        {/* Call to action */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.5 }}
-          className='text-center mt-12 sm:mt-16'
-        >
-          <motion.a
-            href='#reservations'
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            className='inline-block bg-stone-800 text-[#eae4d5] px-6 sm:px-8 py-3 sm:py-4 rounded-xl fluid-text-lg font-semibold hover:bg-stone-700 transition-all duration-300 shadow-lg hover:shadow-xl'
-            onClick={(e) => {
-              e.preventDefault();
-              document
-                .getElementById('reservations')
-                ?.scrollIntoView({ behavior: 'smooth' });
-            }}
-          >
-            Order Your Favorites
-          </motion.a>
-        </motion.div>
       </div>
     </section>
   );
