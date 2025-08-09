@@ -1,5 +1,5 @@
 import React, { useState, memo, useCallback } from 'react';
-import { AnimatePresence } from 'framer-motion';
+import { AnimatePresence, motion } from 'framer-motion';
 import { FaInstagram, FaTiktok, FaTimes } from 'react-icons/fa';
 import { FiExternalLink } from 'react-icons/fi';
 
@@ -86,7 +86,7 @@ const Logo = memo(() => (
 // Social links component
 const SocialLinks = memo(() => (
   <div className='text-2xl flex items-center gap-4 text-[#eae4d5]'>
-    {socialLinks.map(({ icon: url, label }) => (
+    {socialLinks.map(({ icon: Icon, url, label }) => (
       <a
         key={label}
         href={url}
@@ -106,7 +106,7 @@ const ContributorCard = memo(({ name, link, index }) => (
   <motion.div
     {...variants.modal.item}
     transition={{ delay: index * 0.05 }}
-    className='flex flex-col items-center gap-2 p-3 sm:p-4 rounded-xl hover:bg-stone-200/50 transition-all duration-300 hover:scale-105 border border-stone-200'
+    className='flex flex-col items-center gap-2 p-3 sm:p-4 rounded-xl hover:bg-stone-200/50  hover:scale-105 border border-stone-200'
   >
     <span className='text-stone-900 text-sm sm:text-base font-medium text-center leading-tight'>
       {name}
